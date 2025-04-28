@@ -3,8 +3,10 @@ client/node_modules
 
 # *.log
 
-# server/.env
-# client/.env
+server/.env
+client/.env
 
 # client/build
-# .DB_Store
+.DB_Store
+
+client/build
