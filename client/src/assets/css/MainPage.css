@@ -1,0 +1,11 @@
+.main-page-content{
+    /* background: green; */
+    
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.content-end-row{
+    display: flex;
+    justify-content: flex-end;
+}

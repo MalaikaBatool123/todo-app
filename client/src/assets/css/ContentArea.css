@@ -1,0 +1,14 @@
+.content-area-content{
+    /* background: green; */
+    
+}
+
+
+.content-area{
+    /* padding: 20px; */
+    min-height: 100vh;
+    height: auto;
+    border-left: 1px solid grey;
+
+    padding: min(3em, 15%);
+}

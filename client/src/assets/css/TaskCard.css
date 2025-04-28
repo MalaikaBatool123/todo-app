@@ -1,0 +1,16 @@
+.task-card {
+  border: 1px solid grey;
+
+  padding: min(3em, 15%);
+  border-radius: 20px;
+}
+
+.title{max-width: 80%;
+    
+    /* background: green; */
+}
+.task-head{margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
