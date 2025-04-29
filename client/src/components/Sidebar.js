@@ -1,16 +1,25 @@
 import React from "react";
 import "../assets/css/Sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 function Sidebar() {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const location = useLocation(); // Hook to get current location
+
   const toggleSidebar = () => {
     const sidebar = document.getElementById("sidebar");
     const toggleBtn = document.getElementById("toggle-btn");
     sidebar.classList.toggle("close");
     // toggleBtn.classList.toggle('close');
   };
-
+  const { id } = useParams();
+  const isActive = (path) => {
+    if (path === "/updateTask") {
+      return location.pathname.startsWith("/updateTask/") ? "active" : "";
+    }
+    return location.pathname === path ? "active" : "";
+  };
+  
   return (
     <div className="sidebar" id="sidebar">
       <ul>
@@ -28,21 +37,42 @@ function Sidebar() {
             </svg>
           </button>
         </li>
-        <li>
-          <Link to={"/add-task"}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="#e8eaed"
-            >
-              <path d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
-            </svg>
-            <span>Add Task</span>
-          </Link>
-        </li>
-        <li class="active">
+        {!location.pathname.startsWith("/updateTask/") && (
+          <li className={isActive("/add-task")}>
+            <Link to="/add-task">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#e8eaed"
+              >
+                <path d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
+              </svg>
+              <span>Add Task</span>
+            </Link>
+          </li>
+        )}
+
+        {location.pathname.startsWith("/updateTask/") && (
+          <li className={isActive("/updateTask")}>
+            <Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#e8eaed"
+              >
+                <path d="M520-640v-160q0-17 11.5-28.5T560-840h240q17 0 28.5 11.5T840-800v160q0 17-11.5 28.5T800-600H560q-17 0-28.5-11.5T520-640ZM120-480v-320q0-17 11.5-28.5T160-840h240q17 0 28.5 11.5T440-800v320q0 17-11.5 28.5T400-440H160q-17 0-28.5-11.5T120-480Zm400 320v-320q0-17 11.5-28.5T560-520h240q17 0 28.5 11.5T840-480v320q0 17-11.5 28.5T800-120H560q-17 0-28.5-11.5T520-160Zm-400 0v-160q0-17 11.5-28.5T160-360h240q17 0 28.5 11.5T440-320v160q0 17-11.5 28.5T400-120H160q-17 0-28.5-11.5T120-160Zm80-360h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z" />
+              </svg>
+
+              <span>Update Task</span>
+            </Link>
+          </li>
+        )}
+
+        <li className={isActive("/")}>
           <Link to={"/"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +87,7 @@ function Sidebar() {
           </Link>
         </li>
 
-        <li>
+        <li className={isActive("/pending")}>
           <Link to={"/pending"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +101,7 @@ function Sidebar() {
             <span>Pending</span>
           </Link>
         </li>
-        <li>
+        <li className={isActive("/due-today")}>
           <Link to={"/due-today"}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +115,7 @@ function Sidebar() {
             <span>Due Today</span>
           </Link>
         </li>
-        <li>
+        <li className={isActive("/completed")}>
           <Link to="/completed">
             <svg
               xmlns="http://www.w3.org/2000/svg"

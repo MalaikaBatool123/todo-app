@@ -1,10 +1,10 @@
 import React from "react";
 
-function SquareButton({text, property, className, icon}) {
+function SquareButton({text, property, className, icon, onClick}) {
     property = property || "light";
   return (
     <div className="button">
-      <button className={`mx-1 btn btn-sm btn-outline-${property} ${className}` }>{icon} {text}</button>
+      <button onClick={onClick} className={`mx-1 btn btn-sm btn-outline-${property} ${className}` }>{icon} {text}</button>
     </div>
   );
 }

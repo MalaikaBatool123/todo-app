@@ -7,7 +7,7 @@ function MainPage() {
     <>
       <div className="main-page container-fluid">
         <div className="main-page-content">
-            <Sidebar/>
+            {/* <Sidebar/> */}
             <ContentArea/>
         </div>
       </div>

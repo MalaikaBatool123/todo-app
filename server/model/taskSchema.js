@@ -16,7 +16,7 @@ export const createTaskModel = async (sequelize) => {
             allowNull: false
         },
         status: {
-            type: ENUM('pending', 'done'),
+            type: ENUM('pending', 'completed'),
             allowNull: false,
             defaultValue: 'pending'
 

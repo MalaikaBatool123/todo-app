@@ -1,0 +1,25 @@
+.add-task .form{
+    /* background: grey; */
+    width: 80%;
+    border: 
+    1px solid grey;
+    
+  padding: min(3em, 15%);
+  border-radius: 20px;
+}
+.form-group{
+    margin: 20px 0;
+}
+.form-control{
+    width: 100%;
+    /* color: red; */
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px 0
+}
+.form-group.submit{
+    display: flex;
+    justify-content: flex-end;
+}
