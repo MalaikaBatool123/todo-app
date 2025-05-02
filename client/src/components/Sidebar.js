@@ -2,7 +2,10 @@ import React from "react";
 import "../assets/css/Sidebar.css";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Sidebar() {
+  const navigate = useNavigate();
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const location = useLocation(); // Hook to get current location
 
@@ -19,7 +22,22 @@ function Sidebar() {
     }
     return location.pathname === path ? "active" : "";
   };
-  
+
+  const handleLogout = async () => {
+    try {
+      console.log("in logout");
+      localStorage.removeItem("token");
+
+      const response = await axios.get("http://localhost:8000/logout", {
+        withCredentials: true,
+      });
+
+      window.location.href = response.data.redirectUrl || "/login";
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
+
   return (
     <div className="sidebar" id="sidebar">
       <ul>
@@ -129,28 +147,22 @@ function Sidebar() {
             <span>Completed</span>
           </Link>
         </li>
-
-        {isAuthenticated && (
-          <li>
-            <button
-              className="logout-btn btn btn-sm"
-              onClick={() => logout({ returnTo: window.location.origin })}
-            >
-              <Link>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24px"
-                  viewBox="0 -960 960 960"
-                  width="24px"
-                  fill="#e8eaed"
-                >
-                  <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
-                </svg>
-                <span>Log Out</span>
-              </Link>
-            </button>
-          </li>
-        )}
+        <li>
+          <button className="logout-btn btn btn-sm" onClick={handleLogout}>
+            <Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#e8eaed"
+              >
+                <path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z" />
+              </svg>
+              <span>Log Out</span>
+            </Link>
+          </button>
+        </li>
       </ul>
     </div>
   );

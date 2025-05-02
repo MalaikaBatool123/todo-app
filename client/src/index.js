@@ -12,7 +12,8 @@ root.render(
     domain="dev-8c8j7jixl5yn5qpn.us.auth0.com"
     clientId="pSlqzZk9qTxlIahhQdry8bgBvfWzk8IT"
     authorizationParams={{
-      redirect_uri: window.location.origin
+      redirect_uri: window.location.origin,
+      audience: "https://dev-8c8j7jixl5yn5qpn.us.auth0.com/api/v2/"
     }}>
     <App />
     </Auth0Provider>

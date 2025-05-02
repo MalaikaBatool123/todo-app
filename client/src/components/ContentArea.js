@@ -6,6 +6,7 @@ import SquareButton from "./SquareButton";
 import AddTask from "./AddTask";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 function ContentArea() {
   const location = useLocation();
   const path = location.pathname;
@@ -13,20 +14,16 @@ function ContentArea() {
   const [heading, setHeading] = useState("All Tasks");
   const [filteredTasks, setFilteredTasks] = useState([]);
   const { id } = useParams();
-  // const [notAvailableTasks, setNotAvailableTasks] = useState('There are no tasks available');
+  const { getAccessTokenSilently } = useAuth0();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     // Fetch tasks when component loads
     axios
       .get("http://localhost:8000/tasks")
       .then((response) => {
-        // Sort tasks by ID or createdAt in descending order (newest first)
         const sortedTasks = response.data.sort((a, b) => {
-          // If using createdAt:
           return new Date(b.createdAt) - new Date(a.createdAt);
-
-          // Or, if using incremental ID:
-          // return b.id - a.id;
         });
 
         setTasks(sortedTasks);
@@ -62,7 +59,9 @@ function ContentArea() {
         setFilteredTasks(
           tasks.filter(
             (task) =>
-              task.dueDate.split("T")[0] === today && task.status === "pending"
+              task.dueDate &&
+              task.dueDate.split("T")[0] === today &&
+              task.status === "pending"
           )
         );
       } else if (path === "/add-task") {
