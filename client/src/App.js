@@ -4,12 +4,10 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
   useLocation,
   useNavigate,
 } from "react-router-dom";
 
-import { useAuth0 } from "@auth0/auth0-react";
 import AddTask from "./components/AddTask";
 import Sidebar from "./components/Sidebar";
 import { useEffect } from "react";

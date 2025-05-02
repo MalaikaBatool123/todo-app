@@ -1,21 +1,14 @@
 import React from "react";
 import "../assets/css/Sidebar.css";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 function Sidebar() {
-  const navigate = useNavigate();
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const location = useLocation(); // Hook to get current location
 
   const toggleSidebar = () => {
     const sidebar = document.getElementById("sidebar");
-    const toggleBtn = document.getElementById("toggle-btn");
     sidebar.classList.toggle("close");
-    // toggleBtn.classList.toggle('close');
   };
-  const { id } = useParams();
   const isActive = (path) => {
     if (path === "/updateTask") {
       return location.pathname.startsWith("/updateTask/") ? "active" : "";

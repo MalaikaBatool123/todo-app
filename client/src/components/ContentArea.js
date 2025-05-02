@@ -2,20 +2,15 @@ import React from "react";
 import "../assets/css/ContentArea.css";
 import TaskCard from "./TaskCard";
 import { useLocation, useParams } from "react-router-dom";
-import SquareButton from "./SquareButton";
 import AddTask from "./AddTask";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 function ContentArea() {
   const location = useLocation();
   const path = location.pathname;
   const [tasks, setTasks] = useState([]);
-  const [heading, setHeading] = useState("All Tasks");
   const [filteredTasks, setFilteredTasks] = useState([]);
   const { id } = useParams();
-  const { getAccessTokenSilently } = useAuth0();
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     // Fetch tasks when component loads
