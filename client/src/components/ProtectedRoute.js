@@ -3,9 +3,7 @@ import { Navigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 
 function ProtectedRoute({ children }) {
-  console.log("protected");
   const token = localStorage.getItem("token");
-  console.log("token", token);
   if (!token) {
     console.warn("No token found");
     return <Navigate to="/login" />;

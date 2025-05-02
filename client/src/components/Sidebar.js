@@ -18,7 +18,6 @@ function Sidebar() {
 
   const handleLogout = async () => {
     try {
-      console.log("in logout");
       localStorage.removeItem("token");
 
       const response = await axios.get("http://localhost:8000/logout", {

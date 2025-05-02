@@ -20,9 +20,7 @@ function TokenHandler() {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    console.log("params", params);
     const token = params.get("token");
-    console.log("token handler", token);
     if (token) {
       localStorage.setItem("token", token);
       navigate("/", { replace: true }); // remove token from URL
@@ -33,9 +31,7 @@ function TokenHandler() {
 }
 function App() {
   axios.interceptors.request.use((config) => {
-    console.log("localStorage", localStorage);
     const token = localStorage.getItem("token");
-    console.log("TOKEN", token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

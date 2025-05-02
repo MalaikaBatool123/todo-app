@@ -1,10 +1,6 @@
 import { where } from "sequelize";
 import { taskModel, userModel } from "../postgres/postgres.js";
 export const getAllTasks = async (req, res) => {
-  // console.log("re user: ", req.user);
-  // const { email } = req.user;
-  // const user = await userModel.findOne({ where: { email: email } });
-
   try {
     const tasks = await taskModel.findAll({ where: { user_id: req.user.id } });
     // const tasks = await taskModel.findAll();
@@ -18,7 +14,6 @@ export const getAllTasks = async (req, res) => {
 };
 
 export const addTask = async (req, res) => {
-  // const user = await userModel.findOne({ where: { email: req.user.email } });
 
   try {
     const { title, description, status, priority, dueDate } = req.body;
@@ -43,7 +38,6 @@ export const addTask = async (req, res) => {
       dueDate: dueDate || null,
       user_id: req.user.id || null,
     });
-    console.log("newTask: ", newTask);
     res.status(201).json(newTask);
   } catch (error) {
     console.log(error);
@@ -114,7 +108,6 @@ export const updateTask = async (req, res) => {
   }
 };
 export const deleteTask = async (req, res) => {
-  console.log("in delete");
   try {
     // First check if task exists and belongs to user
     const task = await taskModel.findOne({
@@ -150,7 +143,6 @@ export const deleteTask = async (req, res) => {
   }
 };
 export const getTask = async (req, res) => {
-  // console.log("get task");
   try {
     const { id } = req.params;
     const task = await taskModel.findByPk(id);

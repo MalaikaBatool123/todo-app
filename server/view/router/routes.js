@@ -40,7 +40,6 @@ router.get("/auth/failure", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  console.log("logout");
   res.clearCookie("token");
   res.status(200).json({
     message: "Logged out successfully",
