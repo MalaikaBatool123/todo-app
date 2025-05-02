@@ -1,0 +1,202 @@
+# To-Do App
+
+A full-stack to-do application built with Node.js, Express, React, PostgreSQL, and Sequelize, featuring user authentication using OAuth 2.0.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+  - [Backend (Server)](#backend-server)
+  - [Frontend (Client)](#frontend-client)
+- [Database Setup](#database-setup)
+- [Environment Variables](#environment-variables)
+  - [Server](#server-environment-variables)
+- [Project Structure](#project-structure)
+- [Authentication](#authentication)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+## Overview
+
+This application allows users to manage their tasks efficiently. It provides functionalities to create, read, update, and delete tasks. The backend is built using Node.js and Express, providing a RESTful API. The frontend is developed with React, offering a user-friendly interface. PostgreSQL is used as the database, and Sequelize is the ORM (Object-Relational Mapper) for interacting with the database. **User authentication is implemented using OAuth 2.0 via Google, allowing users to securely access their personalized task lists.**
+
+## Features
+
+- **Create Tasks:** Users can add new tasks with a title and description.
+- **View Tasks:** Users can see a list of their existing tasks.
+- **Update Tasks:** Users can modify the details of their tasks.
+- **Delete Tasks:** Users can remove tasks.
+- **User Authentication:** Secure user authentication using **OAuth 2.0 with Google**.
+- **Personalized Task Lists:** Users see only the tasks they have created after logging in.
+- **Responsive Design:** (If applicable) The frontend is designed to work well on different screen sizes.
+
+## Technologies Used
+
+### Backend (Server)
+
+- [Node.js](https://nodejs.org/) - JavaScript runtime environment
+- [Express](https://expressjs.com/) - Web application framework for Node.js
+- [PostgreSQL](https://www.postgresql.org/) - Open-source relational database
+- [Sequelize](https://sequelize.org/) - Promise-based Node.js ORM for PostgreSQL
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - For creating and verifying JWTs for session management after OAuth 2.0 authentication.
+- [passport](https://www.passportjs.org/) and [`passport-google-oauth20`](https://www.npmjs.com/package/passport-google-oauth20) - For implementing Google OAuth 2.0 authentication.
+- [cors](https://www.npmjs.com/package/cors) - For enabling Cross-Origin Resource Sharing
+- [dotenv](https://www.npmjs.com/package/dotenv) - To load environment variables from a `.env` file
+
+### Frontend (Client)
+
+- [React](https://react.dev/) - JavaScript library for building user interfaces
+- [Axios](https://axios-http.com/) - Promise-based HTTP client for making API requests, including sending JWTs for authenticated access.
+- [React Router](https://reactrouter.com/) - For routing in the React application.
+- [CSS Modules/Styled Components/etc.] - For styling (mention the specific library you used).
+
+## Prerequisites
+
+Before you can run this application, you need to have the following installed on your system:
+
+- [Node.js](https://nodejs.org/) (version >= 18 recommended)
+- [npm](https://www.npmjs.com/) (usually comes with Node.js) or [yarn](https://yarnpkg.com/)
+- [PostgreSQL](https://www.postgresql.org/) installed and running
+- **Google Cloud Project:** You need a Google Cloud Project with OAuth 2.0 client credentials configured, including a Client ID and Client Secret, and `http://localhost:8000/auth/google/callback` added as an authorized redirect URI.
+
+## Installation
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone [https://github.com/MalaikaBatool123/todo-app.git](https://github.com/MalaikaBatool123/todo-app.git)
+    cd todo-app
+    ```
+
+2.  **Install server dependencies:**
+
+    ```bash
+    cd server
+    npm install  # or yarn install
+    ```
+
+3.  **Install client dependencies:**
+    ```bash
+    cd ../client
+    npm install  # or yarn install
+    ```
+
+## Running the Application
+
+You need to run both the backend server and the frontend client separately.
+
+### Backend (Server)
+
+1.  **Navigate to the server directory:**
+
+    ```bash
+    cd todo-app/server
+    ```
+
+2.  **Set up environment variables:**
+    Create a `.env` file in the `server` directory and configure the necessary environment variables (see [Environment Variables - Server](#server-environment-variables)). **Ensure you have your Google Client ID and Secret configured here.**
+
+3.  **Run the migrations:**
+
+    ```bash
+    npx sequelize-cli db:migrate
+    ```
+
+    (Make sure you have configured your database connection in `server/config/config.json` or a similar file if you are using Sequelize CLI directly, or adjust the command if you have a different setup.)
+
+4.  **Start the server:**
+    ```bash
+    npm start  # or yarn start (check your package.json for the correct script)
+    ```
+    The server should now be running on `http://localhost:8000` (or the port you configured).
+
+### Frontend (Client)
+
+1.  **Navigate to the client directory:**
+
+    ```bash
+    cd ../client
+    ```
+
+2.  **Start the client:**
+    ```bash
+    npm start  # or yarn start (check your package.json for the correct script, usually `react-scripts start`)
+    ```
+    The client application should now be running on `http://localhost:3000` (by default for Create React App).
+
+## Database Setup
+
+1.  **Ensure PostgreSQL is running.**
+2.  **Create a database** for your application (if it doesn't exist). You can use a tool like `psql` or a GUI like pgAdmin.
+3.  **Configure your database connection** in your Sequelize configuration file (usually in `server/config/config.json`) or through environment variables used by Sequelize. Make sure the database name, username, password, and host are correct.
+
+## Environment Variables
+
+You will need to configure environment variables for the server. Create `.env` file in the respective directory.
+
+### Server Environment Variables (`server/.env`)
+
+Create a .env file in server folder and paste the below credentials into it
+---
+
+## project-structure
+
+todo-app/
+├── client/
+│   ├── public/
+│   │   └── ...
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   ├── components/
+│   │   │   └── ...
+│   │   ├── assets/
+│   │   │   └── css/
+|   |   |       └── ...
+│   │   ├── pages/
+│   │   │   └── ...
+│   │   └── ...
+│   ├── package.json
+├── server/
+│   ├── config/
+│   │   └── config.json (Sequelize configuration)
+│   ├── controller/
+│   │   └── taskController.js
+│   ├── middleware/
+│   │   └── authenticateJWT.js
+│   ├── migrations/
+│   │   └── ...
+│   ├── model/
+│   │   └── taskModel.js
+│   ├── postgres/
+│   │   └── postgres.js (database connection)
+│   ├── view/
+│   │   └── router/
+│   │       └── routes.js
+│   ├── app.js
+│   ├── package.json
+│   └── .env (server environment variables)
+├── .gitignore
+└── README.md
+
+
+
+## Authentication
+
+This application uses **OAuth 2.0 with Google** for user authentication. The authentication flow works as follows:
+
+1.  Users initiate the login process by clicking a "Sign in with Google" button on the frontend.
+2.  The frontend redirects the user to Google's authorization server.
+3.  The user grants permission to the application to access their profile information.
+4.  Google redirects the user back to the backend server at the `/auth/google/callback` endpoint, providing an authorization code.
+5.  The backend server exchanges this authorization code with Google for an access token and user profile information using the `passport-google-oauth20` library.
+6.  Upon successful verification, the backend generates a JWT (JSON Web Token) containing user information.
+7.  This JWT is sent back to the frontend (usually as a query parameter in a redirect).
+8.  The frontend stores this JWT and includes it in the `Authorization` header (as a Bearer token) for subsequent requests to protected backend routes (like fetching or modifying tasks).
+9.  Then the frontend saves this token into local storage and removes it from url.
+10.  The backend uses the `authenticateJWT` middleware to verify the JWT before allowing access to these protected routes, ensuring that only authenticated users can access their own data.
