@@ -11,6 +11,24 @@
 }
 .task-head{margin-bottom: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: start;
+}
+.task-head p{
+  text-align: end;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .task-head{
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+  }
+  .task-head p{
+    width: auto;
+    /* text-align: start; */
+  }
+  
 }

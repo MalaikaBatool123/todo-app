@@ -7,5 +7,17 @@
 
 .content-end-row{
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: end;
+    
+    /* justify-content: end; */
+    /* justify-content: flex-end; */
+}
+@media screen and (min-width: 800px) {
+  .content-end-row{
+    flex-direction: row;
+    justify-content: end;
+  }
+    
+  
 }
