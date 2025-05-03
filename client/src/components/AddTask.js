@@ -3,6 +3,7 @@ import axios from "axios";
 import "../assets/css/AddTask.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import UnAuthorized from "./UnAuthorized";
 function AddTask() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -14,26 +15,66 @@ function AddTask() {
     priority: "medium",
     status: "pending",
   });
+
+  const [isAuthorized, setIsAuthorized] = useState(true);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (id) {
-      axios
-        .get(`http://localhost:8000/tasks/${id}`)
-        .then((response) => {
+    const fetchTask = async () => {
+      try {
+        if (id) {
+          const taskResponse = await axios.get(
+            `http://localhost:8000/tasks/${id}`
+          );
+          const task = taskResponse.data;
+
+          // 2. Get current user's profile
+          const userResponse = await axios.get(
+            "http://localhost:8000/get-profile"
+          );
+          const user = userResponse.data;
+
+          // 3. Verify ownership
+          if (task.user_id !== user.id) {
+            setIsAuthorized(false);
+            return;
+          }
           setFormData({
-            title: response.data.title,
-            description: response.data.description,
-            dueDate: response.data.dueDate
-              ? response.data.dueDate.split("T")[0]
-              : "", // 👈 Here we fix the dueDate
-            priority: response.data.priority,
-            status: response.data.status,
+            title: task.title,
+            description: task.description,
+            dueDate: task.dueDate,
+            priority: task.priority,
+            status: task.status,
           });
-        })
-        .catch((err) => {
-          console.error("Error fetching task:", err);
-        });
-    }
+        }
+      } catch (err) {
+        console.error("Error fetching task:", err);
+        setIsAuthorized(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTask();
   }, [id]);
+  if (loading) {
+    return (
+      <div
+        className="loading"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "95vh",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
+
+  if (!isAuthorized) {
+    return navigate("/unauthorized"); }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));

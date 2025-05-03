@@ -17,6 +17,7 @@ import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
+import UnAuthorized from "./components/UnAuthorized";
 function TokenHandler() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -67,6 +68,7 @@ function App() {
         <TokenHandler />
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/unauthorized" element={<UnAuthorized />} />
           <Route
             path="/*"
             element={
