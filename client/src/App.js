@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
 function TokenHandler() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ function App() {
                       <Route path="/pending" element={<MainPage />} />
                       <Route path="/completed" element={<MainPage />} />
                       <Route path="/due-today" element={<MainPage />} />
+                      <Route path="/profile" element={<Profile />} />
                       <Route path="/add-task" element={<AddTask />} />{" "}
                       <Route path="/updateTask/:id" element={<AddTask />} />{" "}
                     </Routes>

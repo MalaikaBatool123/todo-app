@@ -51,5 +51,6 @@ router.post("/addTask", authenticateJWT, addTask);
 router.put("/updateTask/:id", authenticateJWT, updateTask);
 router.delete("/deleteTask/:id", authenticateJWT, deleteTask);
 router.get("/tasks/:id", authenticateJWT, getTask);
+router.get('/get-profile', authenticateJWT, (req, res) => res.send(req.user));
 
 export default router;
