@@ -139,7 +139,7 @@ function Sidebar() {
             <span>Completed</span>
           </Link>
         </li>
-        <li className={isActive("/completed")}>
+        <li className={isActive("/profile")}>
           <Link to="/profile">
             <svg
               xmlns="http://www.w3.org/2000/svg"
