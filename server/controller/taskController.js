@@ -49,8 +49,7 @@ export const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, status, priority, dueDate } = req.body;
-    console.log('req.body');
-    console.log(req.body);
+    
 
     // 1. First verify the task exists and belongs to user
     const task = await taskModel.findOne({ 
