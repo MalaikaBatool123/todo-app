@@ -103,22 +103,31 @@
         height: 60px;
         width: 100%;
         border-right: none;
+        background: var(--base-clr);
         border-top: 1px solid var(--line-clr);
         padding: 0;
         position: fixed;
         top: unset;
         bottom: 0;
     
+        
         > ul{
           padding: 0;
           display: grid;
           grid-auto-columns: 60px;
           grid-auto-flow: column;
+          justify-content: space-between;
           align-items: center;
           overflow-x: scroll;
         }
         ul li{
           height: 100%;
+        }
+        ul li span{
+          display: none;
+        }
+        ul li a{
+          justify-content: center;
         }
     }    
 }

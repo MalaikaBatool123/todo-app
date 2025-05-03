@@ -1,6 +1,6 @@
 .add-task .form{
     /* background: grey; */
-    width: 80%;
+    width: 100%;
     border: 
     1px solid grey;
     
@@ -22,4 +22,11 @@
 .form-group.submit{
     display: flex;
     justify-content: flex-end;
+}
+
+@media screen and (min-width: 800px) {
+    .add-task .form{
+        width: 80%;
+    }
+    
 }

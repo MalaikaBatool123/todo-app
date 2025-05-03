@@ -22,7 +22,9 @@ function AddTask() {
           setFormData({
             title: response.data.title,
             description: response.data.description,
-            dueDate: response.data.dueDate ? response.data.dueDate.split("T")[0] : "", // 👈 Here we fix the dueDate
+            dueDate: response.data.dueDate
+              ? response.data.dueDate.split("T")[0]
+              : "", // 👈 Here we fix the dueDate
             priority: response.data.priority,
             status: response.data.status,
           });
