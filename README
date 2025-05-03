@@ -88,7 +88,7 @@ Before you can run this application, you need to have the following installed on
 
 ## Running the Application
 
-You need to run both the backend server and the frontend client separately.
+You need to run both the backend server and the frontend client separately by `npm start`.
 
 ### Backend (Server)
 
@@ -141,50 +141,47 @@ You will need to configure environment variables for the server. Create `.env` f
 
 ### Server Environment Variables (`server/.env`)
 
-Create a .env file in server folder and paste the below credentials into it
----
+## Create a .env file in server folder and paste the below credentials into it
 
 ## project-structure
 
 todo-app/
 ├── client/
-│   ├── public/
-│   │   └── ...
-│   ├── src/
-│   │   ├── App.js
-│   │   ├── index.js
-│   │   ├── components/
-│   │   │   └── ...
-│   │   ├── assets/
-│   │   │   └── css/
-|   |   |       └── ...
-│   │   ├── pages/
-│   │   │   └── ...
-│   │   └── ...
-│   ├── package.json
+│ ├── public/
+│ │ └── ...
+│ ├── src/
+│ │ ├── App.js
+│ │ ├── index.js
+│ │ ├── components/
+│ │ │ └── ...
+│ │ ├── assets/
+│ │ │ └── css/
+| | | └── ...
+│ │ ├── pages/
+│ │ │ └── ...
+│ │ └── ...
+│ ├── package.json
 ├── server/
-│   ├── config/
-│   │   └── config.json (Sequelize configuration)
-│   ├── controller/
-│   │   └── taskController.js
-│   ├── middleware/
-│   │   └── authenticateJWT.js
-│   ├── migrations/
-│   │   └── ...
-│   ├── model/
-│   │   └── taskModel.js
-│   ├── postgres/
-│   │   └── postgres.js (database connection)
-│   ├── view/
-│   │   └── router/
-│   │       └── routes.js
-│   ├── app.js
-│   ├── package.json
-│   └── .env (server environment variables)
+│ ├── config/
+│ │ └── config.json (Sequelize configuration)
+│ ├── controller/
+│ │ └── taskController.js
+│ ├── middleware/
+│ │ └── authenticateJWT.js
+│ ├── migrations/
+│ │ └── ...
+│ ├── model/
+│ │ └── taskModel.js
+│ ├── postgres/
+│ │ └── postgres.js (database connection)
+│ ├── view/
+│ │ └── router/
+│ │ └── routes.js
+│ ├── app.js
+│ ├── package.json
+│ └── .env (server environment variables)
 ├── .gitignore
 └── README.md
-
-
 
 ## Authentication
 
@@ -199,4 +196,4 @@ This application uses **OAuth 2.0 with Google** for user authentication. The aut
 7.  This JWT is sent back to the frontend (usually as a query parameter in a redirect).
 8.  The frontend stores this JWT and includes it in the `Authorization` header (as a Bearer token) for subsequent requests to protected backend routes (like fetching or modifying tasks).
 9.  Then the frontend saves this token into local storage and removes it from url.
-10.  The backend uses the `authenticateJWT` middleware to verify the JWT before allowing access to these protected routes, ensuring that only authenticated users can access their own data.
+10. The backend uses the `authenticateJWT` middleware to verify the JWT before allowing access to these protected routes, ensuring that only authenticated users can access their own data.

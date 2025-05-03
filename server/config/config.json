@@ -1,10 +1,10 @@
 {
     "development": {
-      "username": "postgres",
-      "password": "coding@123",
-      "database": "todo",
+      "username": "your_username",
+      "password": "your_password",
+      "database": "your_db_name",
       "host": "127.0.0.1",
-      "port": 5555,
+      "port": 5432, 
       "dialect": "postgres"
     }
   }
