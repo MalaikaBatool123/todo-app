@@ -1,3 +1,7 @@
+# Package lock files
+package-lock.json
+yarn.lock
+
 server/node_modules
 client/node_modules
 
@@ -6,7 +10,9 @@ client/node_modules
 server/.env
 client/.env
 
-# client/build
-.DB_Store
-
 client/build
+
+
+# System files
+.DS_Store
+*.log
