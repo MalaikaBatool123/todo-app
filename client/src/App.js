@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import MainPage from "./pages/MainPage";
 import {
@@ -21,24 +22,49 @@ function TokenHandler() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const token = params.get("token");
+
     if (token) {
+      // Store token in localStorage
       localStorage.setItem("token", token);
-      setTimeout(() => {
-        navigate("/", { replace: true });
-      }, 100);
+      console.log("Token stored successfully");
+
+      // Navigate without the token parameter (no setTimeout needed)
+      navigate("/", { replace: true });
     }
   }, [location, navigate]);
 
   return null; // This component doesn't render anything
 }
+
 function App() {
-  axios.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  });
+  // axios.interceptors.request.use((config) => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     config.headers.Authorization = `Bearer ${token}`;
+  //   }
+  //   return config;
+  // });
+  useEffect(() => {
+    const interceptor = axios.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem("token");
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        } else {
+          console.warn("No token available for request");
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+
+    // Clean up interceptor on component unmount
+    return () => {
+      axios.interceptors.request.eject(interceptor);
+    };
+  }, []);
   return (
     <>
       <Router>
