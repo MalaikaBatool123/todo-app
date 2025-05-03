@@ -33,7 +33,7 @@ export const createTaskModel = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: "users",
+        model: "Users",
         key: "id",
       }
     },
