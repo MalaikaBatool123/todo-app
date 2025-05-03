@@ -34,7 +34,7 @@ function Sidebar() {
     <div className="sidebar" id="sidebar">
       <ul>
         <li>
-          <span className="logo">coding2go</span>
+          <span className="logo"><span className="logo-1">Tas</span><span className="logo-2">Ky</span></span>
           <button onClick={toggleSidebar} id="toggle-btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -36,6 +36,7 @@
   justify-content: flex-end;
   margin-bottom: 16px;
   .logo {
+    
     font-weight: 600;
   }
 }
@@ -59,6 +60,7 @@
   padding: 0.85em;
   text-decoration: none;
   color: var(--text-clr);
+  /* text-align: start; */
   display: flex;
   align-items: center;
   gap: 1em;
@@ -135,4 +137,17 @@
   width: 100%;
   color: white;
   padding: 0;
+}
+
+
+#sidebar .logo-1{
+  color: #05769c;
+}
+
+#sidebar .logo-2{
+  color: rgb(112, 76, 8);
+}
+#sidebar .logo{
+  gap: 0;
+  font-size: 20px;
 }

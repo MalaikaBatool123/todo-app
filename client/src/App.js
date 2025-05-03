@@ -16,6 +16,7 @@ import axios from "axios";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./components/Profile";
+import Navbar from "./components/Navbar";
 function TokenHandler() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,7 +71,8 @@ function App() {
             path="/*"
             element={
               <ProtectedRoute>
-                <div className="d-flex">
+                <div className="d-flex full-page-content">
+                  <Navbar />
                   <Sidebar />
                   <div
                     className="main-page"

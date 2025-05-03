@@ -1,0 +1,24 @@
+.navbar{
+    height:10vh;
+    /* background: green; */
+    position: sticky;
+    border-bottom: 1px solid gray;
+    background: #11121a;
+    top: 0;
+    padding: 20px;
+
+}
+
+.navbar .logo-1{
+    color: #05769c;
+}
+
+.navbar .logo-2{
+    color: rgb(112, 76, 8);
+}
+@media screen and (min-width: 800px) {
+    .navbar{
+        display: none;
+    }
+    
+}
