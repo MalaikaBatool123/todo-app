@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function TaskCard({ task, onDelete, onStatusChange }) {
   const navigate = useNavigate();
+  if (!task.dueDate) task.dueDate = "No due date";
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8000/deleteTask/${task.id}`);
@@ -15,14 +16,23 @@ function TaskCard({ task, onDelete, onStatusChange }) {
     }
   };
 
+    // Check if task is overdue (due date is before today)
+    const isOverdue = () => {
+      if (!task.dueDate) return false;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Normalize to start of day
+      const dueDate = new Date(task.dueDate);
+      return dueDate < today;
+    };
   const handleEdit = () => {
     // Navigate to AddTask with the task ID to edit
     navigate(`/updateTask/${task.id}`);
   };
   const handleMarkAsCompleted = async () => {
     try {
+      console.log("marking completed");
       await axios.put(`http://localhost:8000/updateTask/${task.id}`, {
-        ...task,
+        // ...task,
         status: "completed", // Only change status
       });
       if (onStatusChange) {
@@ -41,11 +51,8 @@ function TaskCard({ task, onDelete, onStatusChange }) {
       </div>
       <p className="description">{task.description}</p>
       <div className="content-end-row">
-        {task.status === "pending" ? (
-          
-        <SquareButton text="Edit" onClick={handleEdit} property={"info"} />
-        ) : (
-          ""
+        {task.status === 'pending'&& !isOverdue() &&(
+          <SquareButton text="Edit" onClick={handleEdit} property={"info"} />
         )}
         <SquareButton
           text="Delete"

@@ -42,6 +42,19 @@ function ContentArea() {
         return "All Tasks";
     }
   };
+  const getEmptyStateMessage = () => {
+    switch (path) {
+      case "/pending":
+        return "No pending tasks available";
+      case "/due-today":
+        return "No tasks due today";
+      case "/completed":
+        return "No completed tasks available";
+      default:
+        return "There are no tasks";
+    }
+  };
+
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
 
@@ -59,10 +72,14 @@ function ContentArea() {
               task.status === "pending"
           )
         );
+        // console.log(tasks)
       } else if (path === "/add-task") {
       } else {
         setFilteredTasks(tasks);
       }
+    }
+    else{
+      setFilteredTasks([]);
     }
   }, [path, tasks]);
 
@@ -78,13 +95,15 @@ function ContentArea() {
     );
   };
 
+  // console.log(tasks.length);
+  // console.log(tasks)
   return (
     <div className="content-area">
       <div className="content-area-content">
         <h1>{getHeading()}</h1>
         {path === "/add-task" || path === `/updateTask/${id}` ? (
           <AddTask taskId={id} /> // Pass the task ID if present (edit mode)
-        ) : tasks.length > 0 ? (
+        ) : filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
             <TaskCard
               onStatusChange={handleStatusChange}
@@ -94,7 +113,7 @@ function ContentArea() {
             />
           ))
         ) : (
-          <div>There are no tasks</div>
+          <div>{getEmptyStateMessage()}</div>
         )}
       </div>
     </div>

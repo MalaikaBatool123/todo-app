@@ -49,6 +49,8 @@ export const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, status, priority, dueDate } = req.body;
+    console.log('req.body');
+    console.log(req.body);
 
     // 1. First verify the task exists and belongs to user
     const task = await taskModel.findOne({ 
@@ -84,7 +86,8 @@ export const updateTask = async (req, res) => {
       description: description || task.description,
       status: status || task.status,
       priority: priority || task.priority,
-      dueDate: dueDate || task.dueDate
+      dueDate: dueDate || task.dueDate,
+      user_id: req.user.id
     };
 
     const [updatedCount] = await taskModel.update(updateData, {
