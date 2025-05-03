@@ -23,7 +23,9 @@ function TokenHandler() {
     const token = params.get("token");
     if (token) {
       localStorage.setItem("token", token);
-      navigate("/", { replace: true }); // remove token from URL
+      setTimeout(() => {
+        navigate("/", { replace: true });
+      }, 100);
     }
   }, [location, navigate]);
 
@@ -63,11 +65,7 @@ function App() {
                       <Route path="/completed" element={<MainPage />} />
                       <Route path="/due-today" element={<MainPage />} />
                       <Route path="/add-task" element={<AddTask />} />{" "}
-                      
-                      <Route
-                        path="/updateTask/:id"
-                        element={<AddTask />}
-                      />{" "}
+                      <Route path="/updateTask/:id" element={<AddTask />} />{" "}
                     </Routes>
                   </div>
                 </div>

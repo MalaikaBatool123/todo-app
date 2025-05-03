@@ -1,19 +1,29 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
-    <div style={{ display: "flex",flexDirection: "column", justifyContent: "center", alignItems: "center", height: "95vh" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "95vh",
+      }}
+    >
+      <h1 style={{ marginBottom: "20px" }}>Login</h1>
 
-      <h1 style={{marginBottom: "20px"}}>Login</h1>
-        
-      <Link style={{ textDecoration: "none"}} to="http://localhost:8000/auth/google">
-      <button className="btn btn-lg btn-outline-light">
-      Login with Google
-      </button>
-      </Link>
+      <a
+        href="http://localhost:8000/auth/google"
+        style={{ textDecoration: "none" }}
+      >
+        <button className="btn btn-lg btn-outline-light">
+          Login with Google
+        </button>
+      </a>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

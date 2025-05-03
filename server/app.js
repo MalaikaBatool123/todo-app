@@ -3,6 +3,7 @@ import cors from "cors";
 import routes from "./view/router/routes.js";
 import { connection } from "./postgres/postgres.js";
 import passport from "./middleware/passport.js";
+import { startTaskNotificationCron } from "./cron/taskNotifier.js";
 const PORT = 8000;
 const app = express();
 
@@ -23,4 +24,5 @@ app.listen(PORT, () => {
   console.log(`Server running on port: `, PORT);
 });
 
+startTaskNotificationCron();
 connection();
