@@ -33,7 +33,7 @@ This application allows users to manage their tasks efficiently. It provides fun
 - **Delete Tasks:** Users can remove tasks.
 - **User Authentication:** Secure user authentication using **OAuth 2.0 with Google**.
 - **Personalized Task Lists:** Users see only the tasks they have created after logging in.
-- **Responsive Design:** (If applicable) The frontend is designed to work well on different screen sizes.
+- **Responsive Design:** The frontend is designed to work well on different screen sizes.
 
 ## Technologies Used
 
